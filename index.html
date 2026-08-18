@@ -21,7 +21,7 @@
 <header class="header">
 
     <a href="#home" class="logo">
-        <img src="images/clean prints.png" alt="Printer Support Logo">
+        <img src="images/clear-prints-logo.png" alt="Printer Support Logo">
     </a>
 
     <nav class="navbar">
@@ -67,29 +67,35 @@
 
             <div class="hero-buttons">
 
-                <!-- <a href="#contact" class="primary-btn">
-                    Get Support 🎧
-                </a> -->
-                <!-- <a href="https://chat.onwebchat.com?id=9d0cf6f6f0f611356cc5a4c91b7046b9"
-   class="header-btn"
+
+
+
+<!-- <a href="https://chat.onwebchat.com?id=9d0cf6f6f0f611356cc5a4c91b7046b9"
+   class="primary-btn"
    target="_blank"
    rel="noopener">
     Get Support 🎧
 </a> -->
 
+                
+
+<div class="support-start">
+    <input
+        type="text"
+        id="printerIssue"
+        class="support-input"
+        placeholder="Enter printer model or issue"
+    >
+
+    <button type="button" class="secondary-btn" onclick="openServicePopup()">
+        Next →
+    </button>
+</div>
 
 
 
-<a href="https://chat.onwebchat.com?id=9d0cf6f6f0f611356cc5a4c91b7046b9"
-   class="primary-btn"
-   target="_blank"
-   rel="noopener">
-    Get Support 🎧
-</a>
 
-                <a href="#services" class="secondary-btn">
-                    View Services 🎧
-                </a>
+
 
             </div>
 
@@ -292,7 +298,7 @@
 
         <!-- BRANDS -->
 
-        <div class="info-box brands-box">
+        <!-- <div class="info-box brands-box">
 
             <h2>Brands We Support</h2>
 
@@ -338,7 +344,31 @@
 
             </div>
 
-        </div>
+        </div> -->
+
+
+
+
+
+        <div class="info-box brands-box">
+
+    <h2>Brands We Support</h2>
+
+    <div class="brand-row">
+
+        <strong class="epson">
+            EPSON
+        </strong>
+
+        <p>
+            Independent support for compatible Epson printer models,
+            including setup, driver installation, Wi-Fi connectivity,
+            software assistance, and basic troubleshooting.
+        </p>
+
+    </div>
+
+</div>
 
 
         <!-- CONTACT -->
@@ -432,7 +462,7 @@
        target="_blank"
        rel="noopener">
         <img
-            src="images/Business-Customer-Support-1.png"
+            src="images/Business-Customer-Support-1-removebg-preview.png"
             alt="Customer support"
         >
     </a>
@@ -501,11 +531,267 @@
 
 </footer>
 
+
+
+
+
+
+<!-- SERVICE POPUP -->
+<div class="support-modal" id="serviceModal">
+    <div class="support-modal-box">
+
+        <button class="modal-close" onclick="closeServicePopup()">
+            ×
+        </button>
+
+        <span class="modal-label">PRINTER SUPPORT</span>
+
+        <h2>How can we help?</h2>
+
+        <p>
+            Select the service you need help with.
+        </p>
+
+        <div class="service-options">
+
+            <button onclick="selectService('Printer Setup')">
+                🖨️ Printer Setup
+            </button>
+
+            <button onclick="selectService('Driver & Software Installation')">
+                💿 Driver & Software Installation
+            </button>
+
+            <button onclick="selectService('Wi-Fi & Network Setup')">
+                📶 Wi-Fi & Network Setup
+            </button>
+
+            <button onclick="selectService('Printer Troubleshooting')">
+                🔧 Printer Troubleshooting
+            </button>
+
+            <button onclick="selectService('Printer Connectivity')">
+                🔗 Printer Connectivity
+            </button>
+
+            <button onclick="selectService('Other Printer Support')">
+                💬 Other Printer Support
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- DETAILS FORM POPUP -->
+<div class="support-modal" id="formModal">
+    <div class="support-modal-box">
+
+        <button class="modal-close" onclick="closeFormPopup()">
+            ×
+        </button>
+
+        <span class="modal-label">GET SUPPORT</span>
+
+        <h2>Tell us a little about your printer</h2>
+
+        <p class="selected-service">
+            Selected service:
+            <strong id="selectedService"></strong>
+        </p>
+
+        <form
+            id="supportForm"
+            action="https://formspree.io/f/meajpvvg"
+            method="POST"
+        >
+
+            <input type="hidden" name="service" id="serviceField">
+            <input type="hidden" name="printer_issue" id="issueField">
+
+            <div class="form-group">
+                <label>Name</label>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Phone</label>
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Your phone number"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Printer Model</label>
+                <input
+                    type="text"
+                    name="printer_model"
+                    placeholder="e.g. Epson L3250"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="submit-support-btn">
+                Submit Request →
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+
+<!-- THANK YOU POPUP -->
+<div class="support-modal" id="thankYouModal">
+    <div class="support-modal-box thank-you-box">
+
+        <div class="success-icon">✓</div>
+
+        <h2>Thank You!</h2>
+
+        <p>
+            Thanks for the details. Our support team will reach out to you shortly.
+        </p>
+
+        <button
+            class="submit-support-btn"
+            onclick="closeThankYou()"
+        >
+            Close
+        </button>
+
+    </div>
+</div>
+
 <script>
 document.getElementById("supportChatBtn").addEventListener("click", function () {
     if (typeof onWebChat_ !== "undefined") {
         onWebChat_.set("open", true);
     }
+});
+</script>
+
+
+
+
+
+<script>
+let selectedServiceName = "";
+
+
+/* NEXT BUTTON */
+function openServicePopup() {
+
+    const issue = document.getElementById("printerIssue").value.trim();
+
+    if (issue === "") {
+        document.getElementById("printerIssue").focus();
+        return;
+    }
+
+    document.getElementById("serviceModal").classList.add("active");
+}
+
+
+/* CLOSE SERVICE POPUP */
+function closeServicePopup() {
+    document.getElementById("serviceModal").classList.remove("active");
+}
+
+
+/* SELECT SERVICE */
+function selectService(service) {
+
+    selectedServiceName = service;
+
+    const issue = document.getElementById("printerIssue").value.trim();
+
+    document.getElementById("selectedService").textContent = service;
+    document.getElementById("serviceField").value = service;
+    document.getElementById("issueField").value = issue;
+
+    document.getElementById("serviceModal").classList.remove("active");
+    document.getElementById("formModal").classList.add("active");
+}
+
+
+/* CLOSE FORM */
+function closeFormPopup() {
+    document.getElementById("formModal").classList.remove("active");
+}
+
+
+/* FORM SUBMIT */
+document.getElementById("supportForm").addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const form = this;
+    const submitButton = form.querySelector(".submit-support-btn");
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Submitting...";
+
+    try {
+
+        const response = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: {
+                "Accept": "application/json"
+            }
+        });
+
+        if (response.ok) {
+
+            form.reset();
+
+            document.getElementById("formModal").classList.remove("active");
+            document.getElementById("thankYouModal").classList.add("active");
+
+            document.getElementById("printerIssue").value = "";
+
+        } else {
+            alert("Something went wrong. Please try again.");
+        }
+
+    } catch (error) {
+
+        alert("Unable to submit your request. Please try again.");
+
+    }
+
+    submitButton.disabled = false;
+    submitButton.textContent = "Submit Request →";
+});
+
+
+/* CLOSE THANK YOU */
+function closeThankYou() {
+    document.getElementById("thankYouModal").classList.remove("active");
+}
+
+
+/* CLOSE MODAL WHEN CLICKING OUTSIDE */
+document.querySelectorAll(".support-modal").forEach(function(modal) {
+
+    modal.addEventListener("click", function(e) {
+
+        if (e.target === modal) {
+            modal.classList.remove("active");
+        }
+
+    });
+
 });
 </script>
 
